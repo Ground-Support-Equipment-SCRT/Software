@@ -1,0 +1,17 @@
+set(CMAKE_SYSTEM_NAME Linux)
+set(CMAKE_SYSTEM_PROCESSOR aarch64)
+
+# Target triplet for 64-bit Raspberry Pi OS (Debian Bookworm/Trixie)
+set(TOOLCHAIN_PREFIX aarch64-linux-gnu)
+
+set(CMAKE_C_COMPILER ${TOOLCHAIN_PREFIX}-gcc)
+set(CMAKE_CXX_COMPILER ${TOOLCHAIN_PREFIX}-g++)
+set(CMAKE_AR ${TOOLCHAIN_PREFIX}-ar)
+set(CMAKE_RANLIB ${TOOLCHAIN_PREFIX}-ranlib)
+set(CMAKE_STRIP ${TOOLCHAIN_PREFIX}-strip)
+
+# Prevent CMake from searching Windows/x86 host directories for target libraries
+set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)

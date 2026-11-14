@@ -1,0 +1,7 @@
+{
+  "cmake.copyCompileCommands": "${workspaceFolder}/compile_commands.json",
+  "C_Cpp.intelliSenseEngine": "disabled",
+  "clangd.arguments": [
+    "--query-driver=/usr/bin/arm-none-eabi-*,/usr/bin/aarch64-linux-gnu-*"
+  ]
+}

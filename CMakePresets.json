@@ -1,0 +1,81 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 23,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+      }
+    },
+    {
+      "name": "pico-debug",
+      "displayName": "pico 1w debug",
+      "inherits": "base",
+      "toolchainFile": "${sourceDir}/pico-sdk/cmake/preload/toolchains/pico_arm_cortex_m0plus_gcc.cmake",
+      "cacheVariables": {
+        "BUILD_TARGET": "PICO",
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "pico-release",
+      "displayName": "pico 1w release",
+      "inherits": "pico-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "linux-debug",
+      "displayName": "pi 5 debug",
+      "inherits": "base",
+      "cacheVariables": {
+        "BUILD_TARGET": "LINUX",
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "linux-release",
+      "displayName": "pi 5 release",
+      "inherits": "linux-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "linux-cross-debug",
+      "displayName": "pi 5 cross compile debug",
+      "description": "cross compile pad control for arm64 linux",
+      "inherits": "base",
+      "toolchainFile": "${sourceDir}/cmake/pi5-aarch64.cmake",
+      "cacheVariables": {
+        "BUILD_TARGET": "LINUX",
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "linux-cross-release",
+      "displayName": "pi 5 cross compile release",
+      "inherits": "linux-cross-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    }
+  ],
+  "buildPresets": [
+    { "name": "pico-debug", "configurePreset": "pico-debug" },
+    { "name": "pico-release", "configurePreset": "pico-release" },
+    { "name": "linux-debug", "configurePreset": "linux-debug" },
+    { "name": "linux-release", "configurePreset": "linux-release" },
+    { "name": "linux-cross-debug", "configurePreset": "linux-cross-debug" },
+    { "name": "linux-cross-release", "configurePreset": "linux-cross-release" }  
+]
+}
